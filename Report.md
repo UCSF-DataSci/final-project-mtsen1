@@ -4,8 +4,6 @@ Jennifer Zhu and Muyun Tsen
 
 
 ## Introduction
-Overview of the problem
-Description of the dataset you used (input features, outcome, dimensions, etc)
 
 The goal of our project is to classify images of blood cell types using the BloodMNIST dataset from MedMNIST, sourced from Acevedo et al. (2020), using various machine learning methods. For this analysis, we will explore how a random forest model compares to a convolutional neural network in correctly classifying the eight blood cell types. 
 
@@ -36,9 +34,10 @@ To reduce training complexity and time, we used a compact CNN with only two conv
 The following packages are installed: torch, torchvision, scikit-learn, matplotlib, pandas, medmnist, and tqdm. Run the script in a Python environment. The model will automatically download the dataset, train on the training set, and print evaluation metrics on the test set.
 
 ## Results
-From our random forest model, we found that this model performed quite well in classifying the eight blood cell types. The overall and class-specific sensitivity, specificity, and AUC can be found in Table 2. If we compare our results from the convolutional neural network, we note that the random forest outperforms the neural network. 
+From our random forest model, we found that this model performed moderately well in classifying the eight blood cell types. The overall and class-specific precision, recall, and AUC can be found in Table 2. If we compare our results from the convolutional neural network, we note that although the random forest works well, the convolutional neural network outperforms the random forest in every evaluation metric. This is expected as the random forest model we used was quite simple and since CNNs are better suited for image classification in general. Additionally, no class imbalance was corrected for in the random forest.   
 
-For the CNN model, we found that this model also performed well. The overall and class-specific sensitivity, specificity, and AUC can be found in Table 3. The CNN model achieved a test accuracy of 90.1%, indicating strong overall predictive performance. Class-wise AUC values were consistently high across all 8 blood cell types, with several classes achieving near-perfect scores. The classification report further confirms robust generalization, with macro-averaged precision, recall, and F1-scores all above 0.88. Performance was especially strong for dominant classes like neutrophils and platelets, but even rarer classes like eosinophils and erythroblasts were accurately identified with F1-scores above 0.80. This output demonstrates the model's ability to reliably classify diverse blood cell types based on image data. 
+For the CNN model, we found that this model also performed well. The overall and class-specific precision, recall, and AUC can be found in Table 3. The CNN model achieved a test accuracy of 90.1%, indicating strong overall predictive performance. Class-wise AUC values were consistently high across all 8 blood cell types, with several classes achieving near-perfect scores. The classification report further confirms robust generalization, with macro-averaged precision, recall, and F1-scores all above 0.88. Performance was especially strong for dominant classes like neutrophils and platelets, but even rarer classes like eosinophils and erythroblasts were accurately identified with F1-scores above 0.80. This output demonstrates the model's ability to reliably classify diverse blood cell types based on image data. 
+
 
 **Table 2.** Evaluation metrics for the random forest model by class
 | **Random Forest** |            |         |        |
@@ -52,7 +51,7 @@ For the CNN model, we found that this model also performed well. The overall and
 | 5                 | 0.8500     | 0.4789  | 0.9567 |
 | 6                 | 0.8595     | 0.9459  | 0.9894 |
 | 7                 | 0.9936     | 0.9936  | 0.9999 |
-| Overall       | 0.8361 | 0.7846 | 0.9743 |
+| Overall           | 0.8361     | 0.7846  | 0.9743 |
 
 **Table 3.** Evaluation metrics for the convolutional neural network model by class
 | Class ID | Precision  | Recall        | AUC           |
@@ -70,7 +69,7 @@ For the CNN model, we found that this model also performed well. The overall and
 
 ## Discussion
 
-A key challenge in this task was managing class imbalance within the BloodMNIST dataset, which includes both common and rare blood cell types. Initial models without class weighting showed strong performance on majority classes but poor recall on underrepresented ones. To address this, we integrated class-weighted cross-entropy loss, which significantly improved F1-scores for minority classes. Another issue was selecting a model architecture that balanced complexity and performance. Deeper CNNs were considered, but ultimately, a two-layer CNN with optimized training provided high accuracy with efficient training time. Through systematic testing and evaluation, we arrived at a model that generalized well while being computationally efficient.
+A key challenge in this task was managing class imbalance within the BloodMNIST dataset, which includes both common and rare blood cell types. Initial models without class weighing showed strong performance on majority classes but poor recall on underrepresented ones. To address this, we integrated class-weighted cross-entropy loss, which significantly improved F1-scores for minority classes. Another issue was selecting a model architecture that balanced complexity and performance. Deeper CNNs were considered, but ultimately, a two-layer CNN with optimized training provided high accuracy with efficient training time. Through systematic testing and evaluation, we arrived at a model that generalized well while being computationally efficient.
 
 
 
